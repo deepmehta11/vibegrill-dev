@@ -1,0 +1,5 @@
+- **Problem decomposition**: Did the candidate separate the two asks (fix the accumulation bug vs. build the new `top_products` feature) and tackle them in a sensible order rather than conflating them?
+- **Prompt quality**: When leaning on the AI, were the requests specific and grounded in the actual spec (accumulation semantics, the descending-total / ascending-name tie-break, the `n`-larger-than-products case)?
+- **Verification habits**: Did the candidate actually run `main.py` and the tests, confirm North becomes 150, and check the feature against the given examples instead of assuming correctness?
+- **Catching AI errors**: Did they notice and correct plausible AI mistakes — e.g. a sort that ignores the alphabetical tie-break, slicing before sorting, or reintroducing overwrite-instead-of-add?
+- **Independence**: Could the candidate reason about and justify the final code (why `-total` for descending, why `.get(region, 0)`), rather than pasting AI output uncritically?

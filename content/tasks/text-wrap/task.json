@@ -1,0 +1,14 @@
+{
+  "slug": "text-wrap",
+  "title": "Greedy Text Wrapper",
+  "difficulty": "easy",
+  "estimatedMinutes": 20,
+  "summary": "Fix a word-wrapping function that silently drops the last line, then add an indent-aware fill() helper.",
+  "entry": "main.py",
+  "tags": [
+    "bug-fix",
+    "feature",
+    "strings",
+    "algorithms"
+  ]
+}

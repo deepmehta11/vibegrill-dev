@@ -1,0 +1,5 @@
+- Problem decomposition: separates the two independent changes (trailing-slash normalization vs. wildcard matching) and locates each in the right helper rather than blindly rewriting `match`.
+- Prompt quality: gives the AI the exact spec — especially the "one or more segments" and joined-by-`/` capture format — instead of a vague "add wildcards" request.
+- Verification habits: runs `main.py` and the visible tests before and after, and reasons about the trailing-slash-plus-wildcard interaction rather than assuming.
+- Catching AI errors: notices if the AI lets `/files/*` match `/files` (zero segments), captures with a stray leading/trailing slash, or breaks exact segment-count matching for non-wildcard routes.
+- Independence: can explain why the original split produced an empty trailing segment and justify the fix, not just accept generated code.

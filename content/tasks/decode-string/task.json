@@ -1,0 +1,15 @@
+{
+  "slug": "decode-string",
+  "title": "Decode Nested Encoded Strings",
+  "difficulty": "hard",
+  "estimatedMinutes": 30,
+  "summary": "Decode strings of the form k[encoded] where the bracketed segment repeats k times, supporting arbitrary nesting and multi-digit counts.",
+  "entry": "main.py",
+  "company": "Google",
+  "tags": [
+    "Google",
+    "strings",
+    "stack",
+    "parsing"
+  ]
+}

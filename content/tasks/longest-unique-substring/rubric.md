@@ -1,0 +1,5 @@
+- **Decomposition:** Did the candidate recognize the sliding-window + last-seen-index structure and separate "track window length" from "track window start for the substring variant"?
+- **Root-cause of the bug:** Did they pinpoint that `left` can move backwards on a stale index, and articulate the `max(left, last_seen[ch]+1)` fix rather than patching symptoms?
+- **Verification habits:** Did they hand-trace or run the adversarial cases (`"abba"`, `"tmmzuxt"`, `"dvdf"`) that distinguish the correct from the buggy version, plus edge cases (empty, single char, all-same)?
+- **Catching AI errors:** If assisted, did they check the tie-breaking rule (first longest wins, e.g. `"pwwkew"` -> `"wke"`) instead of trusting a plausible-looking `"kew"`?
+- **Independence:** Did they drive the fix and the Part-2 extension themselves, keeping the O(n) single-pass approach rather than reaching for an O(n^2) rewrite?

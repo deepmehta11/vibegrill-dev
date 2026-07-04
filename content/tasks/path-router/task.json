@@ -1,0 +1,14 @@
+{
+  "slug": "path-router",
+  "title": "Path Router: Fix Trailing Slashes and Add Wildcard Segments",
+  "difficulty": "medium",
+  "estimatedMinutes": 25,
+  "summary": "Fix a URL route matcher that mishandles trailing slashes, then add trailing \"*\" wildcard support that captures the remaining path.",
+  "entry": "main.py",
+  "tags": [
+    "bug-fix",
+    "feature",
+    "strings",
+    "parsing"
+  ]
+}

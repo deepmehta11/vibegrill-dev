@@ -1,0 +1,5 @@
+- **Decomposition:** Recognizes the correct pipeline — sort by start, then single linear sweep merging when `start <= last_end` — and reuses `merge` inside `total_covered` instead of duplicating logic.
+- **Prompt quality:** Gives the AI the exact merge/touching rule, the unsorted-input requirement, and the no-mutation constraint rather than a vague "merge intervals."
+- **Verification habits:** Runs the provided examples plus own edge cases (empty, single, fully nested, reverse-sorted, negatives) before declaring done.
+- **Catching AI errors:** Notices if a generated solution mutates the input, uses `<` instead of `<=` (dropping touching merges), or forgets to sort; probes those specifically.
+- **Independence:** Diagnoses the root cause (missing sort) without leaning on the AI to be told the bug, and can explain the `O(n log n)` complexity.

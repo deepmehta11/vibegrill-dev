@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "@neondatabase/auth-ui/tailwind";
+
+/* VibeGrill is a dark developer tool; drive `dark:` off a class on <body>
+   (next-themes rewrites the <html> class from the system theme). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Design system: "Ember" — warm charcoal + amber, for VibeGrill ---- */
+@theme {
+  --font-display: var(--font-bricolage), var(--font-geist-sans), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Warm near-black bases */
+  --color-ink: #0b0a09;
+  --color-panel: #14110f;
+  --color-panel-2: #1b1714;
+  --color-elevated: #221d19;
+
+  /* Hairlines */
+  --color-line: #2a2320;
+  --color-line-soft: #201b18;
+
+  /* Text */
+  --color-fg: #f6f3ef;
+  --color-muted: #b6ada4;
+  --color-faint: #7c736b;
+
+  /* Ember accent (brand) */
+  --color-ember: #f59e0b;
+  --color-ember-hot: #fb7a1e;
+  --color-ember-bright: #fbbf24;
+  --color-ember-soft: #f59e0b1f;
+
+  /* Semantic (kept distinct from the brand accent) */
+  --color-pass: #34d399;
+  --color-fail: #fb7185;
+}
+
+:root {
+  color-scheme: dark;
+  --background: var(--color-ink);
+  --foreground: var(--color-fg);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  /* Subtle ember atmosphere: a warm glow up top, a faint cool wash below. */
+  background-image:
+    radial-gradient(
+      70rem 40rem at 78% -8%,
+      rgba(245, 158, 11, 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      55rem 40rem at 8% 108%,
+      rgba(56, 100, 120, 0.07),
+      transparent 55%
+    );
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(245, 158, 11, 0.28);
+  color: #fff;
+}
+
+/* Refined thin scrollbars in the warm palette */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3a322d transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #342c28;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #453b35;
+  background-clip: padding-box;
+}
+
+@keyframes vg-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes vg-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.vg-rise {
+  opacity: 0;
+  animation: vg-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.vg-pulse {
+  animation: vg-pulse 1.8s ease-in-out infinite;
+}
+
+/* Ember primary button */
+.btn-ember {
+  background: linear-gradient(180deg, var(--color-ember-bright), var(--color-ember-hot));
+  color: #2a1400;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 8px 24px -8px rgba(245, 158, 11, 0.6);
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.btn-ember:hover {
+  filter: brightness(1.06);
+}
+.btn-ember:active {
+  transform: translateY(1px);
+}
+.btn-ember:disabled {
+  filter: grayscale(0.4) brightness(0.7);
+  box-shadow: none;
+}
+
+/* Subtle grain for large marketing surfaces */
+.vg-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

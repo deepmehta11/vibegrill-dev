@@ -1,0 +1,14 @@
+{
+  "slug": "retry-backoff",
+  "title": "Retry Decorator: Fix the Attempt Count and Add an on_retry Hook",
+  "difficulty": "hard",
+  "estimatedMinutes": 30,
+  "summary": "Fix an off-by-one bug in a retry decorator so it makes the right number of attempts, then add an on_retry callback invoked before each retry.",
+  "entry": "main.py",
+  "tags": [
+    "bug-fix",
+    "feature",
+    "decorators",
+    "error-handling"
+  ]
+}

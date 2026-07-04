@@ -1,0 +1,16 @@
+{
+  "slug": "longest-unique-substring",
+  "title": "Longest Substring Without Repeating Characters",
+  "difficulty": "medium",
+  "estimatedMinutes": 25,
+  "summary": "Fix a broken sliding-window scanner so it returns the length of the longest substring with all distinct characters, then extend it to return the substring itself.",
+  "entry": "main.py",
+  "company": "Google",
+  "tags": [
+    "Google",
+    "strings",
+    "sliding-window",
+    "hash-map",
+    "two-pointers"
+  ]
+}

@@ -1,0 +1,5 @@
+- **Decomposition:** Separates the two jobs — fixing the drop-last-line bug in `wrap` vs. building `fill` — and does not let one distract from the other.
+- **Prompt quality:** Gives the AI the concrete failing example and the exact `fill` output format (indent counts toward width) rather than a vague "make wrapping work" ask.
+- **Verification habits:** Runs `main.py` and the visible tests before and after changes to confirm the last line reappears and `fill` matches the specified strings.
+- **Catching AI errors:** Notices if the assistant reaches for `textwrap`, miscounts the joining space, or forgets that `indent` reduces the effective width (`width - len(indent)`).
+- **Independence:** Reasons about the greedy packing and edge cases (single word, over-long word, empty input) instead of pasting AI output unchecked.

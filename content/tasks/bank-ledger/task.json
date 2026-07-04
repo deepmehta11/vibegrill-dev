@@ -1,0 +1,9 @@
+{
+  "slug": "bank-ledger",
+  "title": "Fix the account ledger",
+  "difficulty": "easy",
+  "estimatedMinutes": 20,
+  "summary": "An account ledger reports the wrong balance and lets accounts overdraw. Fix the bug and add the missing behavior.",
+  "entry": "main.py",
+  "tags": ["bug-fix", "feature"]
+}

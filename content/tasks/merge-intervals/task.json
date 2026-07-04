@@ -1,0 +1,15 @@
+{
+  "slug": "merge-intervals",
+  "title": "Merge Intervals",
+  "difficulty": "medium",
+  "estimatedMinutes": 25,
+  "summary": "Fix and extend an interval-merging routine so it correctly merges overlapping and touching intervals regardless of input order.",
+  "entry": "main.py",
+  "company": "Meta",
+  "tags": [
+    "Meta",
+    "arrays",
+    "intervals",
+    "sorting"
+  ]
+}

@@ -1,0 +1,5 @@
+- **Problem decomposition**: Did the candidate separate the two asks — first pinning down the exact attempt-count semantics of the bug, then layering the `on_retry` feature — rather than conflating them?
+- **Prompt quality**: When using the AI assistant, did they state the precise contract (total attempts = `times`, re-raise the *last* exception, `attempt_number` is 1-based, callback skipped after final failure) instead of a vague "make retry work"?
+- **Verification habits**: Did they actually run the tests (and `main.py`) after each change, and reason about boundary values like `times=1` and first-attempt success rather than trusting the code by inspection?
+- **Catching AI errors**: If the assistant produced a plausible-but-wrong loop (e.g. `range(times)` combined with a mismatched final-attempt check, or calling `on_retry` after the last failure), did the candidate notice and correct it?
+- **Independence**: Did the candidate drive the fix and understand why the off-by-one occurred, rather than blindly pasting AI output until tests happened to pass?

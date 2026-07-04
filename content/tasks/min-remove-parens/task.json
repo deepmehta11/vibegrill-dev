@@ -1,0 +1,15 @@
+{
+  "slug": "min-remove-parens",
+  "title": "Minimum Remove to Make Valid Parentheses",
+  "difficulty": "medium",
+  "estimatedMinutes": 25,
+  "summary": "Remove the fewest parentheses from a string so the result is valid, preserving all letters and remaining parens in order.",
+  "entry": "main.py",
+  "company": "Meta",
+  "tags": [
+    "Meta",
+    "strings",
+    "stack",
+    "parentheses"
+  ]
+}

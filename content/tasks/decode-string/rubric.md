@@ -1,0 +1,5 @@
+- **Problem decomposition**: Recognizes that the two failures (multi-digit counts, nested brackets) require rethinking the parse into a stack/recursive model rather than patching the linear scan.
+- **Prompt quality**: If using AI assistance, asks for a specific stack-based approach and states the nesting and multi-digit requirements clearly rather than requesting a vague "fix".
+- **Verification habits**: Runs the provided examples plus self-constructed nested cases (e.g. `2[a2[b2[c]]]`) and confirms outputs by hand, not just that tests pass.
+- **Catching AI errors**: Spots regressions like off-by-one on the count accumulator, forgetting to reset the digit buffer after `[`, or mishandling literals between groups.
+- **Independence**: Explains why the stack invariant (repeat on `]`, not before) is correct and can reason about edge cases like empty input without hand-holding.

@@ -1,0 +1,5 @@
+- **Decomposition**: Did the candidate separate the two failure modes (unmatched `')'` during the scan vs. leftover unmatched `'('` at the end) and recognize the given code only handles the first?
+- **Prompt quality**: Did they ask precise questions or state assumptions about validity, tie-breaking/uniqueness, and preserving letter order rather than diving in blind?
+- **Verification habits**: Did they trace the failing inputs (`"(a"`, `"))(("`) by hand and add or run tests, including checking `is_valid` on their own output?
+- **Catching AI errors**: If AI suggested an approach, did they notice over-removal (e.g. deleting matched parens) or minimality violations rather than accepting the first answer?
+- **Independence**: Did they drive the fix and reasoning themselves, using AI as an assistant rather than for the whole solution?

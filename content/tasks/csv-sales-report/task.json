@@ -1,0 +1,14 @@
+{
+  "slug": "csv-sales-report",
+  "title": "CSV Sales Report",
+  "difficulty": "medium",
+  "estimatedMinutes": 25,
+  "summary": "Fix a region-total accumulation bug in a small CSV sales-report library and add a top-products ranking feature.",
+  "entry": "main.py",
+  "tags": [
+    "bug-fix",
+    "feature",
+    "python",
+    "data-processing"
+  ]
+}
