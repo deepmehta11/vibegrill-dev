@@ -35,7 +35,7 @@ export async function* streamChat(opts: {
       authorization: `Bearer ${apiKey()}`,
       "content-type": "application/json",
       // Attribution headers OpenRouter surfaces on its dashboard / rankings.
-      "http-referer": "https://vibegrill.dev",
+      "http-referer": "https://vibegrill.ai",
       "x-title": "VibeGrill",
     },
     body: JSON.stringify({

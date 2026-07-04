@@ -9,6 +9,10 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "routes": [
+    { "pattern": "vibegrill.ai", "custom_domain": true },
+    { "pattern": "www.vibegrill.ai", "custom_domain": true }
+  ],
   "observability": {
     "enabled": true
   }
