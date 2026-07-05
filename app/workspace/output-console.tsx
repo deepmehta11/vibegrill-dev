@@ -11,7 +11,7 @@ export function OutputConsole({ lines }: { lines: OutputLine[] }) {
   }, [lines]);
 
   return (
-    <div className="h-full overflow-auto bg-[#0d0b09] p-4 font-mono text-xs leading-relaxed">
+    <div className="h-full overflow-auto bg-[#0a0c0b] p-4 font-mono text-xs leading-relaxed">
       {lines.length === 0 ? (
         <p className="text-faint">
           Output appears here. Add{" "}

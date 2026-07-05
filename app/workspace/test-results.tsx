@@ -13,7 +13,7 @@ export function TestResultsView({ result }: { result: TestResult }) {
   const total = result.passed + result.failed;
 
   return (
-    <div className="flex h-full flex-col bg-[#0d0b09]">
+    <div className="flex h-full flex-col bg-[#0a0c0b]">
       <div className="flex items-center gap-3 border-b border-line px-4 py-2.5 text-xs">
         <span className="font-mono font-medium text-fg">
           {result.passed}/{total} passing
@@ -45,7 +45,7 @@ export function TestResultsView({ result }: { result: TestResult }) {
                 <span className="font-mono text-muted">{shortName(r.nodeid)}</span>
               </button>
               {isOpen && r.longrepr && (
-                <pre className="overflow-x-auto whitespace-pre-wrap bg-[#080605] px-4 py-3 font-mono text-[11px] text-fail/90">
+                <pre className="overflow-x-auto whitespace-pre-wrap bg-[#080a09] px-4 py-3 font-mono text-[11px] text-fail/90">
                   {r.longrepr}
                 </pre>
               )}

@@ -5,43 +5,60 @@
    (next-themes rewrites the <html> class from the system theme). */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ---- Design system: "Ember" — warm charcoal + amber, for VibeGrill ---- */
+/* ============================================================
+   Design system: "Terminal" — a green-black developer console.
+   Mono-forward, signal-green primary, amber for code, cyan for
+   info. The token NAMES from the old "Ember" system are kept
+   (ember/pass/fail/line/panel…) but their VALUES are the new
+   terminal palette, so every existing `text-ember` / `btn-ember`
+   reference recolors with no renaming. `ember` == the signal accent.
+   ============================================================ */
 @theme {
-  --font-display: var(--font-bricolage), var(--font-geist-sans), ui-sans-serif,
-    system-ui, sans-serif;
+  --font-display: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular",
+    monospace;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular",
+    monospace;
 
-  /* Warm near-black bases */
-  --color-ink: #0b0a09;
-  --color-panel: #14110f;
-  --color-panel-2: #1b1714;
-  --color-elevated: #221d19;
+  /* Green-black bases */
+  --color-ink: #0a0c0b;
+  --color-panel: #0d100e;
+  --color-panel-2: #111613;
+  --color-elevated: #161d17;
 
-  /* Hairlines */
-  --color-line: #2a2320;
-  --color-line-soft: #201b18;
+  /* Green-tinted hairlines */
+  --color-line: #1e2a22;
+  --color-line-soft: #17211a;
 
-  /* Text */
-  --color-fg: #f6f3ef;
-  --color-muted: #b6ada4;
-  --color-faint: #7c736b;
+  /* Text (a touch green-warm, easy on the eyes) */
+  --color-fg: #d8e3d7;
+  --color-muted: #8ba088;
+  --color-faint: #5c6f5d;
 
-  /* Ember accent (brand) */
-  --color-ember: #f59e0b;
-  --color-ember-hot: #fb7a1e;
-  --color-ember-bright: #fbbf24;
-  --color-ember-soft: #f59e0b1f;
+  /* Signal green — the brand accent (kept under the name `ember`) */
+  --color-ember: #4ade80;
+  --color-ember-hot: #22c55e;
+  --color-ember-bright: #86efac;
+  --color-ember-soft: #4ade8016;
 
-  /* Semantic (kept distinct from the brand accent) */
-  --color-pass: #34d399;
+  /* Secondary accents */
+  --color-amber: #f5b301;
+  --color-amber-bright: #fcd34d;
+  --color-cyan: #7dd3fc;
+
+  /* Semantic (fail stays rose so it never reads as the green accent) */
+  --color-pass: #4ade80;
   --color-fail: #fb7185;
+  --color-warn: #f5b301;
 }
 
 :root {
   color-scheme: dark;
   --background: var(--color-ink);
   --foreground: var(--color-fg);
+  /* graph-paper cell + line tint, reused by .term-grid */
+  --grid-line: rgba(74, 222, 128, 0.028);
+  --grid-cell: 46px;
 }
 
 @theme inline {
@@ -53,46 +70,47 @@ body {
   background: var(--color-ink);
   color: var(--color-fg);
   font-family: var(--font-sans);
-  /* Subtle ember atmosphere: a warm glow up top, a faint cool wash below. */
+  /* Faint graph-paper grid + a cool green glow up top: the console signature. */
   background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
     radial-gradient(
-      70rem 40rem at 78% -8%,
-      rgba(245, 158, 11, 0.1),
+      62rem 30rem at 82% -12%,
+      rgba(74, 222, 128, 0.06),
       transparent 60%
-    ),
-    radial-gradient(
-      55rem 40rem at 8% 108%,
-      rgba(56, 100, 120, 0.07),
-      transparent 55%
     );
+  background-size: var(--grid-cell) var(--grid-cell),
+    var(--grid-cell) var(--grid-cell), 100% 100%;
+  background-position: center top;
   background-attachment: fixed;
 }
 
 ::selection {
-  background: rgba(245, 158, 11, 0.28);
-  color: #fff;
+  background: rgba(74, 222, 128, 0.26);
+  color: #eafff0;
 }
 
-/* Refined thin scrollbars in the warm palette */
+/* Thin green-tinted scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3a322d transparent;
+  scrollbar-color: #2a3a30 transparent;
 }
 *::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 *::-webkit-scrollbar-thumb {
-  background: #342c28;
+  background: #243128;
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: #453b35;
+  background: #31432f;
   background-clip: padding-box;
 }
 
+/* ---- Motion ---- */
 @keyframes vg-rise {
   from {
     opacity: 0;
@@ -112,6 +130,16 @@ body {
     opacity: 0.35;
   }
 }
+@keyframes vg-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
 
 .vg-rise {
   opacity: 0;
@@ -121,32 +149,111 @@ body {
   animation: vg-pulse 1.8s ease-in-out infinite;
 }
 
-/* Ember primary button */
+/* A real terminal block cursor. Put it after inline text. */
+.vg-caret {
+  display: inline-block;
+  width: 0.62ch;
+  height: 1.05em;
+  margin-left: 0.12ch;
+  transform: translateY(0.14em);
+  background: var(--color-ember);
+  box-shadow: 0 0 10px -1px rgba(74, 222, 128, 0.7);
+  animation: vg-blink 1.06s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vg-rise,
+  .vg-pulse,
+  .vg-caret {
+    animation: none;
+  }
+  .vg-rise {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Primitives ---- */
+
+/* Signal-green primary button (squared, glowing — a terminal action key) */
 .btn-ember {
-  background: linear-gradient(180deg, var(--color-ember-bright), var(--color-ember-hot));
-  color: #2a1400;
+  background: linear-gradient(180deg, var(--color-ember-bright), var(--color-ember));
+  color: #04170c;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.25) inset,
-    0 8px 24px -8px rgba(245, 158, 11, 0.6);
-  transition: filter 0.15s ease, transform 0.15s ease;
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 22px -8px rgba(74, 222, 128, 0.65);
+  transition: filter 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
 }
 .btn-ember:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 30px -6px rgba(74, 222, 128, 0.8);
 }
 .btn-ember:active {
   transform: translateY(1px);
 }
 .btn-ember:disabled {
-  filter: grayscale(0.4) brightness(0.7);
+  filter: grayscale(0.5) brightness(0.7);
   box-shadow: none;
 }
 
-/* Subtle grain for large marketing surfaces */
-.vg-grain::before {
+/* Ghost button — an outlined terminal command */
+.btn-ghost {
+  border: 1px solid var(--color-line);
+  color: var(--color-fg);
+  background: transparent;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.btn-ghost:hover {
+  border-color: color-mix(in srgb, var(--color-ember) 45%, transparent);
+  color: var(--color-ember);
+  background: var(--color-ember-soft);
+}
+
+/* Keycap chip for ⌘K-style hints */
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  color: var(--color-muted);
+  background: var(--color-panel-2);
+  border: 1px solid var(--color-line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+/* Standalone graph-paper panel (denser than the body wash) */
+.term-grid {
+  background-image:
+    linear-gradient(rgba(74, 222, 128, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 222, 128, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px;
+}
+
+/* Uppercase mono eyebrow/label */
+.term-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+/* Scanline sheen for large hero surfaces (very subtle) */
+.vg-scan::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.014) 0px,
+    rgba(255, 255, 255, 0.014) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.5;
 }

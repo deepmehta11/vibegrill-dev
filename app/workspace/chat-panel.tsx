@@ -92,7 +92,7 @@ export function ChatPanel({
       setStatus("Running the visible tests…");
       const result = await runVisibleTests();
       if (result.failed === 0) {
-        push({ role: "assistant", content: "✅ All visible tests pass." });
+        push({ role: "assistant", content: "✓ All visible tests pass." });
         break;
       }
       if (round === MAX_AGENT_ROUNDS - 1) {
@@ -121,7 +121,7 @@ export function ChatPanel({
     } catch (e) {
       push({
         role: "assistant",
-        content: `⚠️ ${e instanceof Error ? e.message : "Something went wrong."} Please try again.`,
+        content: `× ${e instanceof Error ? e.message : "Something went wrong."} Please try again.`,
       });
     } finally {
       setStatus(null);
@@ -133,20 +133,20 @@ export function ChatPanel({
     <div className="flex h-full flex-col bg-panel/20">
       <div className="border-b border-line px-4 py-3">
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-sm font-semibold text-fg">
+          <h2 className="font-mono text-sm font-semibold text-fg">
             AI assistant
           </h2>
           {sessionId && (
-            <div className="flex rounded-lg border border-line bg-ink p-0.5 text-xs">
+            <div className="flex rounded-md border border-line bg-ink p-0.5 text-xs">
               {(["advice", "agent"] as const).map((m) => (
                 <button
                   key={m}
                   type="button"
                   onClick={() => setMode(m)}
                   disabled={busy}
-                  className={`rounded-md px-2.5 py-0.5 font-medium capitalize transition-colors disabled:opacity-50 ${
+                  className={`rounded-[5px] px-2.5 py-0.5 font-mono font-medium transition-colors disabled:opacity-50 ${
                     mode === m
-                      ? "bg-ember text-[#2a1400]"
+                      ? "bg-ember text-[#04170c]"
                       : "text-faint hover:text-muted"
                   }`}
                 >
@@ -186,7 +186,7 @@ export function ChatPanel({
         {messages.map((m, i) =>
           m.role === "user" ? (
             <div key={i} className="flex justify-end">
-              <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-ember px-3 py-2 text-sm text-[#2a1400]">
+              <div className="max-w-[85%] rounded-lg rounded-br-sm bg-ember px-3 py-2 text-sm text-[#04170c]">
                 {m.content}
               </div>
             </div>
@@ -225,15 +225,15 @@ export function ChatPanel({
               placeholder={
                 mode === "agent" ? "Tell the agent what to change…" : "Ask the assistant…"
               }
-              className="min-h-0 flex-1 resize-none rounded-lg border border-line bg-ink px-3 py-2 text-sm text-fg placeholder:text-faint focus:border-ember/50 focus:outline-none"
+              className="min-h-0 flex-1 resize-none rounded-md border border-line bg-ink px-3 py-2 text-sm text-fg placeholder:text-faint focus:border-ember/50 focus:outline-none"
             />
             <button
               type="button"
               onClick={send}
               disabled={busy || !input.trim()}
-              className="btn-ember rounded-lg px-3.5 py-2 text-sm font-semibold"
+              className="btn-ember rounded-md px-3.5 py-2 font-mono text-sm font-semibold"
             >
-              {busy ? "…" : mode === "agent" ? "Run" : "Send"}
+              {busy ? "…" : mode === "agent" ? "run" : "send"}
             </button>
           </div>
         </div>

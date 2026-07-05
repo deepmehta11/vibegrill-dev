@@ -23,15 +23,15 @@ function statusLabel(status: string): string {
   switch (status) {
     case "booting":
     case "loading-runtime":
-      return "Starting Python…";
+      return "starting python…";
     case "loading-pytest":
-      return "Loading pytest…";
+      return "loading pytest…";
     case "running":
-      return "Running…";
+      return "running…";
     case "ready":
-      return "Python ready";
+      return "python ready";
     case "error":
-      return "Runtime error";
+      return "runtime error";
     default:
       return status;
   }
@@ -246,17 +246,17 @@ export function Workspace({
         <div className="flex min-w-0 items-center gap-3">
           <Link
             href="/tasks"
-            className="grid h-7 w-7 place-items-center rounded-lg border border-line text-muted transition-colors hover:border-ember/40 hover:text-ember"
+            className="grid h-7 w-7 place-items-center rounded-md border border-line font-mono text-muted transition-colors hover:border-ember/40 hover:text-ember"
             aria-label="Back to tasks"
           >
             ←
           </Link>
-          <span className="truncate font-display text-sm font-semibold">
+          <span className="truncate font-mono text-sm font-semibold">
             {task.title}
           </span>
           <CompanyBadge company={task.company} />
           <span
-            className="inline-flex items-center gap-1.5 font-mono text-[11px] font-medium capitalize"
+            className="inline-flex items-center gap-1.5 font-mono text-[11px] font-medium lowercase"
             style={{ color: DIFFICULTY_COLOR[task.difficulty] ?? "var(--color-faint)" }}
           >
             <span
@@ -268,7 +268,7 @@ export function Workspace({
         </div>
         <div className="flex items-center gap-2">
           {error && (
-            <span className="mr-1 max-w-xs truncate text-xs text-fail">
+            <span className="mr-1 max-w-xs truncate font-mono text-xs text-fail">
               {error}
             </span>
           )}
@@ -283,26 +283,26 @@ export function Workspace({
             type="button"
             onClick={doRun}
             disabled={busy || submitting}
-            className="rounded-lg border border-line px-3 py-1.5 text-xs font-medium text-fg transition-colors hover:border-ember/40 hover:text-ember disabled:opacity-40 disabled:hover:border-line disabled:hover:text-fg"
+            className="rounded-md border border-line px-3 py-1.5 font-mono text-xs font-medium text-fg transition-colors hover:border-ember/40 hover:text-ember disabled:opacity-40 disabled:hover:border-line disabled:hover:text-fg"
           >
-            Run
+            ▸ run
           </button>
           <button
             type="button"
             onClick={doTest}
             disabled={busy || submitting}
-            className="rounded-lg border border-line px-3 py-1.5 text-xs font-medium text-fg transition-colors hover:border-ember/40 hover:text-ember disabled:opacity-40 disabled:hover:border-line disabled:hover:text-fg"
+            className="rounded-md border border-line px-3 py-1.5 font-mono text-xs font-medium text-fg transition-colors hover:border-ember/40 hover:text-ember disabled:opacity-40 disabled:hover:border-line disabled:hover:text-fg"
           >
-            Run tests
+            run tests
           </button>
           {sessionId && (
             <button
               type="button"
               onClick={doSubmit}
               disabled={busy || submitting}
-              className="btn-ember rounded-lg px-4 py-1.5 text-xs font-semibold"
+              className="btn-ember rounded-md px-4 py-1.5 font-mono text-xs font-semibold"
             >
-              {submitting ? "Submitting…" : "Submit"}
+              {submitting ? "submitting…" : "submit"}
             </button>
           )}
         </div>
@@ -316,13 +316,13 @@ export function Workspace({
                 key={tab}
                 type="button"
                 onClick={() => setLeftTab(tab)}
-                className={`rounded-t-lg px-3 py-1.5 font-medium transition-colors ${
+                className={`rounded-t-md px-3 py-1.5 font-mono font-medium lowercase transition-colors ${
                   leftTab === tab
                     ? "bg-panel-2 text-fg"
                     : "text-faint hover:text-muted"
                 }`}
               >
-                {tab === "tests" ? "Visible tests" : "Instructions"}
+                {tab === "tests" ? "visible tests" : "instructions"}
               </button>
             ))}
           </div>
@@ -332,13 +332,14 @@ export function Workspace({
             ) : (
               <div className="space-y-4">
                 <p className="text-xs text-faint">
-                  These run when you hit <strong className="text-muted">Run tests</strong>.
+                  These run when you hit{" "}
+                  <strong className="font-mono text-muted">run tests</strong>.
                   Hidden tests are used only when you submit.
                 </p>
                 {task.visibleTests.map((f) => (
                   <div key={f.path}>
                     <p className="mb-1 font-mono text-xs text-muted">{f.path}</p>
-                    <pre className="overflow-x-auto rounded-lg border border-line bg-[#100d0b] p-3 font-mono text-[11px] leading-relaxed text-muted">
+                    <pre className="overflow-x-auto rounded-md border border-line bg-[#0a0c0b] p-3 font-mono text-[11px] leading-relaxed text-muted">
                       {f.content}
                     </pre>
                   </div>
@@ -357,14 +358,14 @@ export function Workspace({
                 onClick={() => setActive(path)}
                 className={`relative h-full border-r border-line px-4 font-mono text-xs transition-colors ${
                   active === path
-                    ? "bg-[#14110f] text-fg"
+                    ? "bg-[#0c100e] text-fg"
                     : "text-faint hover:text-muted"
                 } ${path === SCRATCH_PATH ? "italic" : ""}`}
               >
                 {active === path && (
                   <span className="absolute top-0 left-0 h-0.5 w-full bg-ember" />
                 )}
-                {path === SCRATCH_PATH ? "✎ scratch" : path}
+                {path === SCRATCH_PATH ? "~ scratch" : path}
               </button>
             ))}
           </div>
@@ -382,13 +383,13 @@ export function Workspace({
                   key={tab}
                   type="button"
                   onClick={() => setBottomTab(tab)}
-                  className={`rounded-t-lg px-3 py-1.5 font-medium transition-colors ${
+                  className={`rounded-t-md px-3 py-1.5 font-mono font-medium lowercase transition-colors ${
                     bottomTab === tab
                       ? "bg-panel-2 text-fg"
                       : "text-faint hover:text-muted"
                   }`}
                 >
-                  {tab === "tests" ? "Test results" : "Output"}
+                  {tab === "tests" ? "test results" : "output"}
                 </button>
               ))}
             </div>
@@ -399,7 +400,7 @@ export function Workspace({
                 <TestResultsView result={testResult} />
               ) : (
                 <div className="flex h-full items-center justify-center font-mono text-xs text-faint">
-                  Run the tests to see results.
+                  run the tests to see results.
                 </div>
               )}
             </div>

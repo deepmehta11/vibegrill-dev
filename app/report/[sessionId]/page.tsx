@@ -50,30 +50,24 @@ export default async function ReportPage({
     <>
       <SiteHeader user={authSession.user} />
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-14">
-        <p className="font-mono text-xs tracking-widest text-ember uppercase">
-          Session report
-        </p>
-        <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-fg">
+        <p className="term-label">// session report</p>
+        <h1 className="mt-3 font-mono text-3xl font-semibold tracking-tight text-fg">
           {title}
         </h1>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-line bg-panel/50 p-6">
-            <p className="font-mono text-xs tracking-wide text-faint uppercase">
-              Hidden tests
-            </p>
-            <p className="mt-2 font-display text-4xl font-semibold">
+          <div className="rounded-xl border border-line bg-panel/50 p-6">
+            <p className="term-label">hidden tests</p>
+            <p className="mt-3 font-mono text-4xl font-semibold tabular-nums">
               <span style={{ color: testsAllGreen ? "var(--color-pass)" : "var(--color-fg)" }}>
                 {testScore ? `${testScore.passed}/${testScore.total}` : "—"}
               </span>
               <span className="ml-2 text-base font-normal text-faint">passing</span>
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-2xl border border-line bg-panel/50 p-6">
-            <p className="font-mono text-xs tracking-wide text-faint uppercase">
-              AI collaboration
-            </p>
-            <p className="mt-2 font-display text-4xl font-semibold text-ember">
+          <div className="relative overflow-hidden rounded-xl border border-line bg-panel/50 p-6">
+            <p className="term-label">ai collaboration</p>
+            <p className="mt-3 font-mono text-4xl font-semibold tabular-nums text-ember">
               {rubric ? `${rubric.overall}` : "—"}
               <span className="text-base font-normal text-faint">/5</span>
             </p>
@@ -83,18 +77,18 @@ export default async function ReportPage({
 
         {rubric && (
           <>
-            <div className="mt-6 rounded-2xl border border-line bg-panel/50 p-6">
+            <div className="mt-6 rounded-xl border border-line bg-panel/50 p-6">
               <p className="leading-relaxed text-muted">{rubric.summary}</p>
             </div>
 
-            <h2 className="mt-10 font-display text-lg font-semibold text-fg">
+            <h2 className="mt-10 font-mono text-lg font-semibold text-fg">
               How you worked with the AI
             </h2>
             <ul className="mt-5 space-y-5">
               {rubric.dimensions.map((d) => (
                 <li key={d.key} className="border-b border-line-soft pb-5 last:border-0">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-fg">{d.label}</span>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="font-mono font-medium text-fg">{d.label}</span>
                     <ScoreDots score={d.score} />
                   </div>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">
@@ -109,15 +103,15 @@ export default async function ReportPage({
         <div className="mt-12 flex flex-wrap gap-3">
           <Link
             href="/tasks"
-            className="btn-ember inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-semibold"
+            className="btn-ember inline-flex h-12 items-center justify-center rounded-md px-7 font-mono text-sm font-semibold"
           >
-            Practice another task
+            ▸ practice another task
           </Link>
           <Link
             href="/history"
-            className="inline-flex h-12 items-center justify-center rounded-full border border-line px-6 text-sm font-medium text-fg transition-colors hover:bg-panel"
+            className="btn-ghost inline-flex h-12 items-center justify-center rounded-md px-6 font-mono text-sm font-medium"
           >
-            View history
+            view history
           </Link>
         </div>
       </main>

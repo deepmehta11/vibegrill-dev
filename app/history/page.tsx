@@ -30,10 +30,8 @@ export default async function HistoryPage() {
     <>
       <SiteHeader user={session.user} />
       <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-14">
-        <p className="font-mono text-xs tracking-widest text-ember uppercase">
-          History
-        </p>
-        <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-fg">
+        <p className="term-label">// history</p>
+        <h1 className="mt-3 font-mono text-3xl font-semibold tracking-tight text-fg">
           Your sessions
         </h1>
         <p className="mt-2 text-muted">
@@ -41,13 +39,13 @@ export default async function HistoryPage() {
         </p>
 
         {sessions.length === 0 ? (
-          <div className="mt-10 rounded-2xl border border-dashed border-line p-12 text-center">
+          <div className="mt-10 rounded-xl border border-dashed border-line p-12 text-center">
             <p className="text-muted">No sessions yet.</p>
             <Link
               href="/tasks"
-              className="mt-3 inline-block font-medium text-ember hover:text-ember-bright"
+              className="mt-3 inline-block font-mono font-medium text-ember hover:text-ember-bright"
             >
-              Browse tasks →
+              ▸ browse tasks
             </Link>
           </div>
         ) : (
@@ -59,10 +57,10 @@ export default async function HistoryPage() {
                 <li key={s.id}>
                   <Link
                     href={href}
-                    className="flex items-center justify-between gap-4 rounded-xl border border-line bg-panel/40 px-5 py-4 transition-colors hover:border-ember/30 hover:bg-panel"
+                    className="group flex items-center justify-between gap-4 rounded-xl border border-line bg-panel/40 px-5 py-4 transition-colors hover:border-ember/30 hover:bg-panel"
                   >
                     <div className="min-w-0">
-                      <p className="font-medium text-fg">
+                      <p className="font-mono font-medium text-fg transition-colors group-hover:text-ember">
                         {titleFor.get(s.task_slug) ?? s.task_slug}
                       </p>
                       <p className="mt-0.5 font-mono text-xs text-faint">
@@ -73,18 +71,18 @@ export default async function HistoryPage() {
                     <div className="shrink-0 text-right text-sm">
                       {submitted && s.rubric ? (
                         <>
-                          <span className="font-display font-semibold text-ember">
+                          <span className="font-mono font-semibold text-ember tabular-nums">
                             {s.rubric.overall}/5
                           </span>
                           {s.test_score && (
-                            <span className="ml-2 font-mono text-xs text-faint">
+                            <span className="ml-2 font-mono text-xs text-faint tabular-nums">
                               {s.test_score.passed}/{s.test_score.total} tests
                             </span>
                           )}
                         </>
                       ) : (
-                        <span className="text-faint">
-                          {submitted ? "scored" : "resume →"}
+                        <span className="font-mono text-faint">
+                          {submitted ? "scored" : "resume ▸"}
                         </span>
                       )}
                     </div>

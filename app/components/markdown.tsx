@@ -57,7 +57,7 @@ const components: Components = {
     );
   },
   pre: ({ children }) => (
-    <pre className="my-3 overflow-x-auto rounded-lg border border-line bg-[#100d0b] p-3 font-mono text-sm text-fg">
+    <pre className="my-3 overflow-x-auto rounded-md border border-line bg-[#0a0c0b] p-3 font-mono text-sm text-fg">
       {children}
     </pre>
   ),

@@ -58,9 +58,9 @@ export function OtpForm() {
   }
 
   const inputClass =
-    "mt-1 w-full rounded-lg border border-line bg-ink px-3 py-2.5 text-sm text-fg placeholder:text-faint outline-none transition-colors focus:border-ember/50";
+    "mt-1 w-full rounded-md border border-line bg-ink px-3 py-2.5 text-sm text-fg placeholder:text-faint outline-none transition-colors focus:border-ember/50";
   const buttonClass =
-    "btn-ember mt-5 flex h-12 w-full items-center justify-center rounded-full px-6 text-sm font-semibold";
+    "btn-ember mt-5 flex h-12 w-full items-center justify-center rounded-md px-6 font-mono text-sm font-semibold";
 
   return (
     <div className="w-full max-w-sm">
@@ -68,11 +68,11 @@ export function OtpForm() {
         <Wordmark />
       </div>
 
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-panel/60 p-7">
+      <div className="relative overflow-hidden rounded-xl border border-line bg-panel/60 p-7">
         <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-ember/10 blur-3xl" />
         {step === "email" ? (
           <form onSubmit={sendCode}>
-            <h1 className="font-display text-xl font-semibold text-fg">Sign in</h1>
+            <h1 className="font-mono text-xl font-semibold text-fg">Sign in</h1>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">
               Enter your email and we&apos;ll send you a one-time code — no
               password needed.
@@ -100,7 +100,7 @@ export function OtpForm() {
           </form>
         ) : (
           <form onSubmit={verify}>
-            <h1 className="font-display text-xl font-semibold text-fg">
+            <h1 className="font-mono text-xl font-semibold text-fg">
               Enter your code
             </h1>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">
