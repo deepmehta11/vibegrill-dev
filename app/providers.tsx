@@ -13,6 +13,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       authClient={authClient}
       navigate={router.push}
       Link={Link}
+      // VibeGrill ships dark only; force Neon Auth's components (UserButton
+      // dropdown, AuthView) dark so they match instead of following the OS.
+      defaultTheme="dark"
     >
       {children}
     </NeonAuthUIProvider>
